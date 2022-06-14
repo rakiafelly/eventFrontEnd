@@ -1,41 +1,41 @@
-<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
-  <c-container>
-    <c-row class="justify-content-center">
-      <c-col lg="7" md="9" xl="6">
-        <c-card class="mx-4">
-          <c-card-body class="p-4">
-            <form cForm>
-              <h1>Register</h1>
-              <p class="text-medium-emphasis">Create your account</p>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilUser"></svg>
-                </span>
-                <input autoComplete="name" cFormControl placeholder="Username" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>@</span>
-                <input autoComplete="email" cFormControl placeholder="Email" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" cFormControl placeholder="Password" type="password" />
-              </c-input-group>
-              <c-input-group class="mb-4">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" cFormControl placeholder="Repeat password" type="password" />
-              </c-input-group>
-              <div class="d-grid">
-                <button cButton color="success">Create Account</button>
-              </div>
-            </form>
-          </c-card-body>
-        </c-card>
-      </c-col>
-    </c-row>
-  </c-container>
-</div>
+<div class="card">
+  <h4 class="card-header">Registre</h4>
+  <div class="card-body">
+      <form  *ngIf="registreForm" [formGroup]="registreForm" (ngSubmit)="registre()" >
+          <div class="form-group">
+              <label for="firstName">Firstname</label>
+              <input type="text" formControlName="firstName" class="form-control"  [ngClass]="{'is-valid': submitted &&
+              !registreForm.get('firstName')?.errors,'is-invalid': submitted && registreForm.get('firstName')?.errors}" />
+          </div>
+          <div class="invalid feedback" *ngIf=" submitted && registreForm.get('firstName')?.hasError('required')">
+              FirstName is required
+          </div>
+          <div class="form-group">
+              <label for="lastName">LastName</label>
+              <input type="text" formControlName="lastName" class="form-control"  [ngClass]="{'is-valid': submitted &&
+              !registreForm.get('lastName')?.errors,'is-invalid': submitted && registreForm.get('lastName')?.errors}" />
+          </div>
+          <div class="invalid feedback" *ngIf=" submitted && registreForm.get('lastName')?.hasError('required')">
+              LastName is required
+          </div>
+          <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="text" formControlName="email" class="form-control"  [ngClass]="{'is-valid': submitted &&
+              !registreForm.get('email')?.errors,'is-invalid': submitted && registreForm.get('email')?.errors}" />
+          </div>
+          <div class="invalid feedback" *ngIf=" submitted && registreForm.get('email')?.hasError('required')">
+              E_mail is required
+          </div>
+          <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" formControlName="password" class="form-control" [ngClass]="{'is-valid': submitted &&
+              !registreForm.get('password')?.errors,'is-invalid': submitted && registreForm.get('password')?.errors}" />
+          </div>
+          <div class="invalid feedback" *ngIf=" submitted && registreForm.get('password')?.hasError('required')">
+              Password is required4
+          </div>
+          <div class="form-group">
+              <button  class="btn btn-primary" type="submit" >Registre </button>
+          </div>
+      </form>
+          

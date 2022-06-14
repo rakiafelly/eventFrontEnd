@@ -25,6 +25,20 @@ export const navItems: INavData[] = [
     linkProps: { fragment: 'someAnchor' },
     iconComponent: { name: 'cil-pencil' }
   },
+
+  {
+    name: 'Companies',
+    url: '/pages/company',
+  },
+  {
+    name: 'Events',
+    url: '/pages/event',
+  },
+  {
+    name: 'Tag',
+    url: '/pages/tag',
+  },
+  
   {
     name: 'Components',
     title: true
