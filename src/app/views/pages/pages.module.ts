@@ -20,6 +20,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ForgetPasswordComponent,
     RegistreComponent,
     ResetPasswordComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     CommonModule,
