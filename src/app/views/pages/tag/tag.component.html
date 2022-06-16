@@ -1,1 +1,96 @@
-<p>tag works!</p>
+<!-- Button trigger modal -->
+<div class="card">
+  <h4 class="card-header">Tag list</h4>
+  <div class="card-body">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTagModal">
+      Add Tag
+    </button>
+
+    <div class="row">
+      <table class="table table-hover-striped table-responsive">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tag of tags,let i=index">
+            <th>{{i+1}} </th>
+            <td>{{tag.title}} </td>
+            <td>{{tag.description}} </td>
+            <td>
+              <button class="btn btn-danger" (click)="delete(tag._id)">Delete</button>
+              <button class="btn btn-info text-white"  data-bs-toggle="modal" data-bs-target="#updateTagModal">update</button>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="modal fade" id="addTagModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create Tag</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form *ngIf="tagForm" [formGroup]="tagForm" (ngSubmit)="addTag()">
+              <div class="mb-3 row">
+                <label for="title" class="col-form-label col-sm-2">Title:</label>
+                <div class="col-md-5">
+                  <input type="text" class="form-control" formControlName="title" placeholder="Title">
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="description" class="col-form-label col-sm-2">Description:</label>
+                <div class="col-md-5">
+                  <textarea class="form-control" formControlName="description" placeholder="Description"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="updateTagModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Tag</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form *ngIf="tagForm" [formGroup]="tagForm" (ngSubmit)="update()">
+              <div class="mb-3 row">
+                <label for="title" class="col-form-label col-sm-2">Title:</label>
+                <div class="col-md-5">
+                  <input type="text" class="form-control" formControlName="title" placeholder="Title">
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="description" class="col-form-label col-sm-2">Description:</label>
+                <div class="col-md-5">
+                  <textarea class="form-control" formControlName="description" placeholder="Description"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

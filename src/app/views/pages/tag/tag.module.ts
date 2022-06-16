@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { TagRoutingModule } from './tag-routing.module';
 import { TagComponent } from './tag.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalModule } from '@coreui/angular';
 
 
 @NgModule({
@@ -11,7 +13,10 @@ import { TagComponent } from './tag.component';
   ],
   imports: [
     CommonModule,
-    TagRoutingModule
+    TagRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ModalModule,
   ]
 })
 export class TagModule { }

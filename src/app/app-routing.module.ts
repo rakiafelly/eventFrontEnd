@@ -7,6 +7,7 @@ import { LoginComponent } from './views/pages/login/login.component';
 import { ResetPasswordComponent} from './views/pages/reset-password/reset-password.component';
 
 import { RegistreComponent } from './views/pages/register/register.component';
+import { ForgetPasswordComponent } from './views/pages/forget-password/forget-password.component';
 
 const routes: Routes = [
   {
@@ -101,8 +102,14 @@ const routes: Routes = [
       title: 'Register Page'
     }
   },
+  {
+    path:'forget-password',component:ForgetPasswordComponent,
+    data:{
+      title:'Forget Page'
+    }
+  },
+  {path:'reset-password', component:ResetPasswordComponent},
   {path: '**', redirectTo: 'dashboard'},
-  {path:'reset', component:ResetPasswordComponent},
   
 ];
 
