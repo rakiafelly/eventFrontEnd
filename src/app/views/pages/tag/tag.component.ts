@@ -12,7 +12,7 @@ export class TagComponent implements OnInit {
 @ViewChild("modal") public modal?:ModalDirective
   tagForm?: FormGroup
   tags: any
-  id:any
+  tagId:any
   submitted=false
 
   constructor(private tagService: TagService) { }
@@ -28,13 +28,13 @@ this.getAllTags();
   addTag() {
     this.tagService.createTag(this.tagForm?.value).subscribe((response: any) => {
       console.log(response)
+      this.ngOnInit();
     }, (error: any) => {
       console.log(error)
     }
     )
-    
     this.hide();
-    this.ngOnInit();
+    
   }
   getAllTags() {
     this.tagService.getTag().subscribe((response: any) => {
@@ -55,11 +55,17 @@ this.getAllTags();
     // this.tagForm?.reset()
     this.submitted = false;
   }
-
+showData(id:number){
+this.tagId=id;
+  this.tagService.getTagById(id).subscribe((response:any)=>{
+    console.log(response)
+    this.tagForm?.patchValue(response);
+  },(error:any)=>{console.log(error)});
+}
   update(){
-    this.tagService.updateTag(this.id,this.tagForm?.value)?.subscribe((response:any)=>{
+    this.tagService.updateTag(this.tagId,this.tagForm?.value)?.subscribe((response:any)=>{
       console.log(response);
-      
+      this.ngOnInit();
     },(error:any)=>{console.log(error)});
     
   }

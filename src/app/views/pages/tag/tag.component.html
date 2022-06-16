@@ -23,7 +23,7 @@
             <td>{{tag.description}} </td>
             <td>
               <button class="btn btn-danger" (click)="delete(tag._id)">Delete</button>
-              <button class="btn btn-info text-white"  data-bs-toggle="modal" data-bs-target="#updateTagModal">update</button>
+              <button class="btn btn-info text-white" (click)="showData(tag._id) " data-bs-toggle="modal" data-bs-target="#updateTagModal">update</button>
 
             </td>
           </tr>
