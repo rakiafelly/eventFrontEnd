@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistreComponent } from './register/register.component';
 import {RouterModule } from '@angular/router';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA]
 

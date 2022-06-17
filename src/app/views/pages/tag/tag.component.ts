@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TagService } from './services/tag.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-tag',
   templateUrl: './tag.component.html',
@@ -12,10 +13,10 @@ export class TagComponent implements OnInit {
 @ViewChild("modal") public modal?:ModalDirective
   tagForm?: FormGroup
   tags: any
-  tagId:any
+   tagId:any
   submitted=false
-
-  constructor(private tagService: TagService) { }
+  
+  constructor(private toastr:ToastrService, private tagService: TagService) { }
 
   ngOnInit(): void {
     this.tagForm = new FormGroup({
@@ -27,10 +28,10 @@ this.getAllTags();
 
   addTag() {
     this.tagService.createTag(this.tagForm?.value).subscribe((response: any) => {
-      console.log(response)
+      this.toastr.success('Tag is created successfully','Success')
       this.ngOnInit();
     }, (error: any) => {
-      console.log(error)
+      this.toastr.error('Tag already exist','Exist');
     }
     )
     this.hide();
@@ -39,14 +40,13 @@ this.getAllTags();
   getAllTags() {
     this.tagService.getTag().subscribe((response: any) => {
       this.tags = response;
-      console.log(this.tags);
-      
     }, (error: any) => { console.log(error) });
   }
 
   delete(id:any){
     this.tagService.deleteTag(id).subscribe((response:any)=>{
       this.getAllTags();
+      this.toastr.info('Tag is deleted successffuly','Deleted')
     },(error:any)=>{console.log(error)});
   }
 
@@ -56,15 +56,14 @@ this.getAllTags();
     this.submitted = false;
   }
 showData(id:number){
-this.tagId=id;
+ this.tagId=id;
   this.tagService.getTagById(id).subscribe((response:any)=>{
-    console.log(response)
     this.tagForm?.patchValue(response);
   },(error:any)=>{console.log(error)});
 }
   update(){
     this.tagService.updateTag(this.tagId,this.tagForm?.value)?.subscribe((response:any)=>{
-      console.log(response);
+      this.toastr.success('Tag is updated successfully','Updated' )
       this.ngOnInit();
     },(error:any)=>{console.log(error)});
     
