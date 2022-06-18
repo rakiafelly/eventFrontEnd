@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {  ToastrService } from 'ngx-toastr';
 import { EventService } from './services/event.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class EventsComponent implements OnInit {
   submitted = false;
   events: any;
   eventId: any;
-  constructor(private eventService: EventService) { }
+  constructor(private toastr:ToastrService,  private eventService: EventService) { }
 
   ngOnInit(): void {
     this.eventForm = new FormGroup({
@@ -38,6 +38,7 @@ export class EventsComponent implements OnInit {
   addEvent() {
     this.eventService.createEvent(this.eventForm?.value).subscribe((response: any) => {
       console.log(response)
+      this.toastr.success('Tag is created successfully','Success')
       this.ngOnInit();
     }, (error: any) => {
       console.log(error)
@@ -48,9 +49,9 @@ export class EventsComponent implements OnInit {
     getAllEvents(){
       this.eventService.getEvent().subscribe((response: any) => {
         this.events = response;
-        console.log(this.events);
-        
-      }, (error: any) => { console.log(error) });
+        console.log(this.events);   
+      }, (error: any) => {    this.toastr.error('Tag already exist','Exist');
+    });
     }
     
 
@@ -65,8 +66,7 @@ export class EventsComponent implements OnInit {
 
   update() {
     this.eventService.updateEvent(this.eventId,this.eventForm?.value).subscribe((response: any) => {
-      this.events = response;
-      console.log(this.events);
+      this.toastr.success('Tag is updated successfully','Updated' )
       this.ngOnInit();
 
    }, (error: any) => { console.log(error) }
@@ -76,7 +76,7 @@ export class EventsComponent implements OnInit {
    
   delete(id:any) {
     this.eventService.deleteEvent(id).subscribe((response: any) => {
-      console.log(response)
+      this.toastr.info('Tag is deleted successffuly','Deleted')
       this.ngOnInit();
     }, (error: any) => {
       console.log(error)

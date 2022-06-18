@@ -1,1 +1,156 @@
-<p>company works!</p>
+
+<!-- Button trigger modal -->
+<div class="card">
+    <h4 class="card-header">Company list</h4>
+    <div class="card-body">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTagModal">
+        Add Company
+      </button>
+  
+      <div class="row">
+        <table class="table table-hover-striped table-responsive">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">companyName</th>
+              <th scope="col">companyDescription</th>
+              <th scope="col">email</th>
+              <th scope="col">password</th>
+              <th scope="col">role</th>
+              <th scope="col">avatar</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let company of companies,let i=index">
+              <th>{{i+1}} </th>
+              <td>{{company.companyName}} </td>
+              <td>{{company.companyDescription}} </td>
+              <td>{{company.email}} </td>
+              <td>{{company.password}} </td>
+              <td>{{company.role}} </td>
+              <td>{{company.photo}} </td>
+              <td>
+                <button class="btn btn-danger" (click)="delete(company._id)">Delete</button>
+                <button class="btn btn-info text-white" (click)="showData(company._id) " data-bs-toggle="modal"
+                  data-bs-target="#updateTagModal">update</button>
+  
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+  
+      <div class="modal fade" id="addTagModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-eventname" id="exampleModalLabel">Create Company</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form *ngIf="companyForm" [formGroup]="companyForm" (ngSubmit)="addCompany()">
+                <div class="mb-3 row">
+                  <label for="companyName" class="col-form-label col-sm-2">CompanyName:</label>
+                  <div class="col-md-5">
+                    <input type="text" class="form-control" formControlName="companyName" placeholder="CompanyName">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="companyDescription" class="col-form-label col-sm-2">CompanyDescription:</label>
+                  <div class="col-md-5">
+                    <textarea class="form-control" formControlName="companyDescription"
+                      placeholder="companyDescription"></textarea>
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="email" class="col-form-label col-sm-2">E-mail:</label>
+                  <div class="col-md-5">
+                    <input type="text" class="form-control" formControlName="email" placeholder="E-mail">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="password" class="col-form-label col-sm-2">Password:</label>
+                  <div class="col-md-5">
+                    <input type="text" class="form-control" formControlName="password" placeholder="password">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="role" class="col-form-label col-sm-2">Role:</label>
+                  <div class="col-md-5">
+                    <input type="text" class="form-control" formControlName="role" placeholder="role">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="photo" class="col-form-label col-sm-2">Photo:</label>
+                  <div class="col-md-5">
+                    <input type="text" class="form-control" formControlName="photo" placeholder="Photo">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="updateTagModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-eventname" id="exampleModalLabel">Update Company</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form *ngIf="companyForm" [formGroup]="companyForm" (ngSubmit)="update()">
+                    <div class="mb-3 row">
+                      <label for="companyName" class="col-form-label col-sm-2">CompanyName:</label>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" formControlName="companyName" placeholder="EventName">
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="companyDescription" class="col-form-label col-sm-2">CompanyDescription:</label>
+                      <div class="col-md-5">
+                        <textarea class="form-control" formControlName="companyDescription"
+                          placeholder="companyDescription"></textarea>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="email" class="col-form-label col-sm-2">E-mail:</label>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" formControlName="email" placeholder="E-mail">
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="password" class="col-form-label col-sm-2">Password:</label>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" formControlName="password" placeholder="password">
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="role" class="col-form-label col-sm-2">Role:</label>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" formControlName="role" placeholder="role">
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="photo" class="col-form-label col-sm-2">Photo:</label>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" formControlName="photo" placeholder="EventName">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </form>     
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
