@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { AuthService } from '../auth.service';
 export class RegistreComponent implements OnInit {
   registreForm?: FormGroup
   submitted = false;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     {
@@ -33,9 +34,11 @@ export class RegistreComponent implements OnInit {
       return;
     }
     this.authService.registre(this.registreForm?.value).subscribe((response => {
-      console.log(response);
+      this.toastr.success('User is created successfully','Success')
       this.router.navigateByUrl('/login');
-    }), (error => { console.log(error) }))
+    }), (error => {
+      this.toastr.error('User already exist','Exist')
+    }))
   }
 
 }

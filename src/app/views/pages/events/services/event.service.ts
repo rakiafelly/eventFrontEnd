@@ -12,6 +12,7 @@ export class EventService {
   createEvent(data:any){
    return this.http.post(`${this.baseUrl}event`,data);
 
+
   }
 
   getEvent(){
