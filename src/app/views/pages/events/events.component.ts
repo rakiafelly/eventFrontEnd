@@ -37,7 +37,6 @@ export class EventsComponent implements OnInit {
   }
   addEvent() {
     this.eventService.createEvent(this.eventForm?.value).subscribe((response: any) => {
-      console.log(response)
       this.toastr.success('Tag is created successfully','Success')
       this.ngOnInit();
     }, (error: any) => {
@@ -48,8 +47,7 @@ export class EventsComponent implements OnInit {
 
     getAllEvents(){
       this.eventService.getEvent().subscribe((response: any) => {
-        this.events = response;
-        console.log(this.events);   
+        this.events = response; 
       }, (error: any) => {    this.toastr.error('Tag already exist','Exist');
     });
     }
@@ -58,7 +56,6 @@ export class EventsComponent implements OnInit {
   showData(id: any) {
     this.eventId=id;
     this.eventService.getEventByTd(id).subscribe((response:any)=>{
-      console.log(response)
       this.eventForm?.patchValue(response);
     },(error:any)=>{console.log(error)});
   }
