@@ -29,7 +29,7 @@ export const navItems: INavData[] = [
   {
     name: 'Companies',
     url: '/pages/company',
-    iconComponent:{name:'cil-bank'}
+    // iconComponent:{name:'cil-bank'}
   },
   {
     name: 'Events',

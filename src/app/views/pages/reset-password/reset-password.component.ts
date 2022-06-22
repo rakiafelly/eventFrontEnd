@@ -10,33 +10,28 @@ import { ResetPasswordService } from './services/reset-password.service';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
-
-  constructor(private route:ActivatedRoute, private router:Router, private resetService:ResetPasswordService, private toastr:ToastrService) { }
   resetForm?: FormGroup;
   submitted = false;
+  constructor(private route: ActivatedRoute, private router: Router, private resetService: ResetPasswordService, private toastr: ToastrService) { }
   ngOnInit(): void {
     this.resetForm = new FormGroup(
       {
         password: new FormControl('', Validators.required),
         confirm: new FormControl('', Validators.required),
-        token:new FormControl('',[]),
-
+        token: new FormControl('', []),
       })
-      
+  }
 
-}
-reset(){
-let token=this.route.snapshot.params["token"];
-this.resetForm?.controls['token'].setValue(token);
-console.log(this.resetForm?.value);
-  this.resetService.resetPassword(this.resetForm?.value).subscribe((response: any) => {
-    this.toastr.success('Your password is reset','Success');
-    this.router.navigate(['/login'])
-
-  },
-    ((error: any) => {
-       this.toastr.error('Your password is not reset','Error')
-    }))
-}
+  reset() {
+    let token = this.route.snapshot.params["token"];
+    this.resetForm?.controls['token'].setValue(token);
+    this.resetService.resetPassword(this.resetForm?.value).subscribe((response: any) => {
+      this.toastr.success('Your password is reset', 'Success');
+      this.router.navigate(['/login'])
+    },
+      ((error: any) => {
+        this.toastr.error('Your password is not reset', 'Error')
+      }))
+  }
 
 }

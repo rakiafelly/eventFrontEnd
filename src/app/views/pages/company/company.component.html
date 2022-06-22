@@ -75,10 +75,10 @@
                 <div class="mb-3 row">
                   <label for="role" class="col-form-label col-sm-4">Role:</label>
                   <div class="col-sm-8">
-                  <select class="form-select">
+                  <select class="form-select" formControlName="role">
                     <option selected>Open this select menu</option>
-                      <option value="admin">Admin</option>
-                      <option value="super admin">Super admin</option>
+                      <option value="Admin">Admin</option>
+                      <option value="Super_admin">Super admin</option>
                     
                   </select>
             
@@ -87,7 +87,7 @@
                 <div class="mb-3 row">
                   <label for="photo" class="col-form-label col-sm-4">Photo:</label>
                   <div class="col-sm-8">
-                    <input type="file" class="form-control"  (change)="selectImage($event)"  formControlName="photo" placeholder="Photo">
+                    <input type="file" class="form-control"  (change)="selectImage($event)" placeholder="Photo" accept="image/*" >
                   </div>
                   <img *ngIf="companyForm.value.photo" [src]="companyForm.value.photo">
                 </div>
