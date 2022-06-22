@@ -13,20 +13,20 @@
   <div class="card-body">
       <form  *ngIf="registreForm" [formGroup]="registreForm" (ngSubmit)="registre()" >
           <div class="form-group">
-              <label for="firstName">Firstname</label>
-              <input type="text" formControlName="firstName" class="form-control"[ngClass]="{'is-valid': submitted &&
-              !registreForm.get('firstName')?.errors,'is-invalid': submitted && registreForm.get('firstName')?.errors}" />
+              <label for="companyName">Name</label>
+              <input type="text" formControlName="companyName" class="form-control"[ngClass]="{'is-valid': submitted &&
+              !registreForm.get('companyName')?.errors,'is-invalid': submitted && registreForm.get('companyName')?.errors}" />
           </div>
-          <div class="invalid-feedback d-block " *ngIf=" submitted && registreForm.get('firstName')?.hasError('required')">
+          <div class="invalid-feedback d-block " *ngIf=" submitted && registreForm.get('companyName')?.hasError('required')">
               FirstName is required
           </div>
           <div class="form-group">
-              <label for="lastName">LastName</label>
-              <input type="text" formControlName="lastName" class="form-control"  [ngClass]="{'is-valid': submitted &&
-              !registreForm.get('lastName')?.errors,'is-invalid': submitted && registreForm.get('lastName')?.errors}" />
+              <label for="description">Description</label>
+              <input type="text" formControlName="companyDescription" class="form-control"  [ngClass]="{'is-valid': submitted &&
+              !registreForm.get('companyDescription')?.errors,'is-invalid': submitted && registreForm.get('companyDescription')?.errors}" />
           </div>
-          <div class="invalid-feedback d-block" *ngIf=" submitted && registreForm.get('lastName')?.hasError('required')">
-              LastName is required
+          <div class="invalid-feedback d-block" *ngIf=" submitted && registreForm.get('companyDescription')?.hasError('required')">
+              Description is required
           </div>
           <div class="form-group">
               <label for="email">E-mail</label>
@@ -45,7 +45,11 @@
               Password is required
           </div>
           <div class="form-group">
-              <button  class="btn btn-primary" type="submit" >Registre </button>
+            <label for="avatar">Avatar</label>
+            <input type="file" formControlName="avatar" class="form-control">
+        </div>
+          <div class="form-group">
+              <button  class="btn btn-primary" type="submit" >Register </button>
           </div>
           <p class="text-center text-muted mt-5 mb-0">Have already an account? <a [routerLink]="['/login']"            class="fw-bold text-body"><u>Login here</u></a></p>
       </form>

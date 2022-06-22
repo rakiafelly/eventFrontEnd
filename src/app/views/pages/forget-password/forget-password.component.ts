@@ -23,7 +23,7 @@ export class ForgetPasswordComponent implements OnInit {
 
   forget() {
     this.forgetPasswordService.forgetPassword(this.forgetForm?.value).subscribe((response: any) => {
-      this.toastr.success('Your request to reset password was sent','Email sent');
+      this.toastr.success(`Your request to reset password was sent to ${this.forgetForm?.value.email} `,'Email sent ');
     },
       ((error: any) => {
         this.toastr.error('Your email is not exist','Error')

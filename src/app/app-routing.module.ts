@@ -108,10 +108,9 @@ const routes: Routes = [
       title:'Forget Page'
     }
   },
-  {path:'reset-password', component:ResetPasswordComponent},
+  {path:'reset-password/:token', component:ResetPasswordComponent},
   {path: '**', redirectTo: 'dashboard'},
-  
-];
+  ];
 
 @NgModule({
   imports: [

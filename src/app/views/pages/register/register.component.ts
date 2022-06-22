@@ -18,11 +18,11 @@ export class RegistreComponent implements OnInit {
     {
       this.registreForm = new FormGroup(
         {
-          firstName: new FormControl('', Validators.required),
-          lastName: new FormControl('', Validators.required),
+          companyName: new FormControl('', Validators.required),
+          companyDescription: new FormControl('', Validators.required),
           email: new FormControl('', Validators.required),
           password: new FormControl('', Validators.required),
-
+          avatar: new FormControl(''),
         })
     }
 

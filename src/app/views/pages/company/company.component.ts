@@ -12,6 +12,7 @@ export class CompanyComponent implements OnInit {
 companyForm?:FormGroup;
 companies:any;
 companyId:any;
+  image: any;
   constructor(private toastr:ToastrService,  private companyService:CompanyService) { }
 
   ngOnInit(): void {
@@ -37,6 +38,14 @@ this.companyService.createCompany(this.companyForm?.value).subscribe((response: 
 
   })
 }
+
+selectImage(event:Event){
+
+    const file= (event.target as HTMLInputElement).files
+  
+  }
+
+
 getAllCompanies(){
   this.companyService.getCompany().subscribe((response: any) => {
     this.companies = response;
