@@ -13,6 +13,7 @@ import {RouterModule } from '@angular/router';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ToastrModule } from 'ngx-toastr';
 
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -21,7 +22,8 @@ import { ToastrModule } from 'ngx-toastr';
     ForgetPasswordComponent,
     RegistreComponent,
     ResetPasswordComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+  
   ],
   imports: [
     CommonModule,

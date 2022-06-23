@@ -1,12 +1,15 @@
-
 <!-- Button trigger modal -->
 <div class="card">
-    <h4 class="card-header">Company list</h4>
-    <div class="card-body">
+  <h4 class="card-header">Company list</h4>
+  <div class="card-body">
+    <div class="row">
+      <div class=" offset-6 col-6 my-5">
+        <input class="form-control" type="search" [(ngModel)]="searchText">
+      </div>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCompanyModal">
         Add Company
       </button>
-  
+
       <div class="row">
         <table class="table table-hover-striped table-responsive">
           <thead>
@@ -20,7 +23,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let company of companies,let i=index">
+
+            <tr *ngFor="let company of companies | search:searchText; let i=index">
               <th>{{i+1}} </th>
               <td>{{company.companyName}} </td>
               <td>{{company.email}} </td>
@@ -30,14 +34,14 @@
                 <button class="btn btn-danger" (click)="delete(company._id)">Delete</button>
                 <button class="btn btn-info text-white" (click)="showData(company._id) " data-bs-toggle="modal"
                   data-bs-target="#updateCompanyModal">update</button>
-  
+
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-  
-  
+
+
       <div class="modal fade" id="addCompanyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -75,19 +79,20 @@
                 <div class="mb-3 row">
                   <label for="role" class="col-form-label col-sm-4">Role:</label>
                   <div class="col-sm-8">
-                  <select class="form-select" formControlName="role">
-                    <option selected>Open this select menu</option>
+                    <select class="form-select" formControlName="role">
+                      <option selected>Open this select menu</option>
                       <option value="Admin">Admin</option>
                       <option value="Super_admin">Super admin</option>
-                    
-                  </select>
-            
+
+                    </select>
+
                   </div>
                 </div>
                 <div class="mb-3 row">
                   <label for="photo" class="col-form-label col-sm-4">Photo:</label>
                   <div class="col-sm-8">
-                    <input type="file" class="form-control"  (change)="selectImage($event)" placeholder="Photo" accept="image/*" >
+                    <input type="file" class="form-control" (change)="selectImage($event)" placeholder="Photo"
+                      accept="image/*">
                   </div>
                   <img *ngIf="companyForm.value.photo" [src]="companyForm.value.photo">
                 </div>
@@ -96,12 +101,13 @@
                   <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
               </form>
-             
+
             </div>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="updateCompanyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="updateCompanyModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -109,49 +115,56 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form *ngIf="companyForm" [formGroup]="companyForm" (ngSubmit)="update()">
-                    <div class="mb-3 row">
-                      <label for="companyName" class="col-form-label col-sm-4">CompanyName:</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" formControlName="companyName" placeholder="EventName">
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="companyDescription" class="col-form-label col-sm-4">CompanyDescription:</label>
-                      <div class="col-sm-8">
-                        <textarea class="form-control" formControlName="companyDescription"
-                          placeholder="companyDescription"></textarea>
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="email" class="col-form-label col-sm-4">E-mail:</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" formControlName="email" placeholder="E-mail">
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="password" class="col-form-label col-sm-4">Password:</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" formControlName="password" placeholder="password">
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="role" class="col-form-label col-sm-4">Role:</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" formControlName="role" placeholder="role">
-                      </div>
-                    </div>
-                    <div class="mb-3 row">
-                      <label for="photo" class="col-form-label col-sm-4">Photo:</label>
-                      <div class="col-sm-8">
-                        <input type="file" class="form-control" formControlName="photo" placeholder="photo">
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </form>     
+              <form *ngIf="companyForm" [formGroup]="companyForm" (ngSubmit)="update()">
+                <div class="mb-3 row">
+                  <label for="companyName" class="col-form-label col-sm-4">CompanyName:</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" formControlName="companyName" placeholder="EventName">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="companyDescription" class="col-form-label col-sm-4">CompanyDescription:</label>
+                  <div class="col-sm-8">
+                    <textarea class="form-control" formControlName="companyDescription"
+                      placeholder="companyDescription"></textarea>
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="email" class="col-form-label col-sm-4">E-mail:</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" formControlName="email" placeholder="E-mail">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="password" class="col-form-label col-sm-4">Password:</label>
+                  <div class="col-sm-8">
+                    <input type="password" class="form-control" formControlName="password" placeholder="password">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="role" class="col-form-label col-sm-4">Role:</label>
+                  <div class="col-sm-8">
+                    <select class="form-select" formControlName="role">
+                      <option selected>Open this select menu</option>
+                      <option value="Admin">Admin</option>
+                      <option value="Super_admin">Super admin</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="photo" class="col-form-label col-sm-4">Photo:</label>
+                  <div class="col-sm-8">
+                    <input type="file" class="form-control" (change)="selectImage($event)" placeholder="Photo"
+                      accept="image/*">
+                  </div>
+                  <img *ngIf="companyForm.value.photo" [src]="companyForm.value.photo">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+
+              </form>
             </div>
           </div>
         </div>

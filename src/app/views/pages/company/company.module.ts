@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { CompanyRoutingModule } from './company-routing.module';
 import { CompanyComponent } from './company.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchPipe } from './pipes/search.pipe';
 
 
 @NgModule({
   declarations: [
-    CompanyComponent
+    CompanyComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,

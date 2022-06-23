@@ -14,6 +14,7 @@ export class CompanyComponent implements OnInit {
   companyId: any;
   selectedFile: any;
   submitted = false;
+  searchText:any;
   constructor(private toastr: ToastrService, private companyService: CompanyService) { }
 
   ngOnInit(): void {
@@ -72,7 +73,14 @@ export class CompanyComponent implements OnInit {
     }, (error: any) => { console.log(error) });
   }
   update() {
-    this.companyService.updateCompany(this.companyId, this.companyForm?.value).subscribe((response: any) => {
+    let formData:any=new FormData();
+    const companyForm = this.companyForm?.value;
+     delete companyForm.photo
+    Object.keys(companyForm).forEach(fieldName => {
+      formData.append(fieldName, companyForm[fieldName]);
+    });
+    formData.append('photo',this.selectedFile,this.selectedFile.name); 
+    this.companyService.updateCompany(this.companyId, formData).subscribe((response: any) => {
       this.toastr.success('Company is updated successfully', 'Updated')
       this.ngOnInit();
 

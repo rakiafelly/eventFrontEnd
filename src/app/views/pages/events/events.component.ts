@@ -14,6 +14,8 @@ export class EventsComponent implements OnInit {
   submitted = false;
   events: any;
   eventId: any;
+  selectedFile:any;
+  searchText:any
   constructor(private toastr:ToastrService,  private eventService: EventService) { }
 
   ngOnInit(): void {
@@ -36,14 +38,29 @@ export class EventsComponent implements OnInit {
 
   }
   addEvent() {
-    this.eventService.createEvent(this.eventForm?.value).subscribe((response: any) => {
-      this.toastr.success('Tag is created successfully','Success')
+    this.submitted = true;
+
+    let formData:any=new FormData();
+    const eventForm = this.eventForm?.value;
+     delete eventForm.photo
+    Object.keys(eventForm).forEach(fieldName => {
+      formData.append(fieldName, eventForm[fieldName]);
+    });
+    formData.append('photo',this.selectedFile,this.selectedFile.name); 
+    this.eventService.createEvent(formData).subscribe((response: any) => {
+      this.toastr.success('Event is created successfully','Success')
       this.ngOnInit();
     }, (error: any) => {
       console.log(error)
     }
     )
   }
+
+  selectImage(event: any) {
+    const file = event.target.files[0];
+    this.selectedFile = file;
+  }
+
 
     getAllEvents(){
       this.eventService.getEvent().subscribe((response: any) => {
@@ -57,13 +74,22 @@ export class EventsComponent implements OnInit {
     this.eventId=id;
     this.eventService.getEventByTd(id).subscribe((response:any)=>{
       this.eventForm?.patchValue(response);
+      console.log(response);
+      
     },(error:any)=>{console.log(error)});
   }
    
 
   update() {
-    this.eventService.updateEvent(this.eventId,this.eventForm?.value).subscribe((response: any) => {
-      this.toastr.success('Tag is updated successfully','Updated' )
+    let formData:any=new FormData();
+    const eventForm = this.eventForm?.value;
+     delete eventForm.photo
+    Object.keys(eventForm).forEach(fieldName => {
+      formData.append(fieldName, eventForm[fieldName]);
+    });
+    formData.append('photo',this.selectedFile,this.selectedFile.name);
+    this.eventService.updateEvent(this.eventId,formData).subscribe((response: any) => {
+      this.toastr.success('Event is updated successfully','Updated' )
       this.ngOnInit();
 
    }, (error: any) => { console.log(error) }
@@ -73,7 +99,7 @@ export class EventsComponent implements OnInit {
    
   delete(id:any) {
     this.eventService.deleteEvent(id).subscribe((response: any) => {
-      this.toastr.info('Tag is deleted successffuly','Deleted')
+      this.toastr.info('Event is deleted successffuly','Deleted')
       this.ngOnInit();
     }, (error: any) => {
       console.log(error)
