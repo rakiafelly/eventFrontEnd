@@ -54,28 +54,48 @@
                 <div class="mb-3 row">
                   <label for="companyName" class="col-form-label col-sm-4">Name:</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" formControlName="companyName" placeholder="Name">
-                  </div>
+                    <input type="text" class="form-control" formControlName="companyName" placeholder="Name"  [ngClass]="{'is-valid': submitted &&
+                    !companyForm.get('companyName')?.errors,'is-invalid': submitted && companyForm.get('companyName')?.errors}" >
+                    </div>
                 </div>
+                    <div class="invalid-feedback d-block" *ngIf=" submitted && companyForm.get('companyName')?.hasError('required')">
+                        Name is required
+                    </div>
+                  
                 <div class="mb-3 row">
                   <label for="companyDescription" class="col-form-label col-sm-4">Description:</label>
                   <div class="col-sm-8">
                     <textarea class="form-control" formControlName="companyDescription"
-                      placeholder="Description"></textarea>
+                      placeholder="Description"  [ngClass]="{'is-valid': submitted &&
+                      !companyForm.get('companyDescription')?.errors,'is-invalid': submitted && companyForm.get('companyDescription')?.errors}" ></textarea>
+                      </div>
                   </div>
-                </div>
+                      <div class="invalid-feedback d-block" *ngIf=" submitted && companyForm.get('companyDescription')?.hasError('required')">
+                          Description is required
+                      </div>
+                  
                 <div class="mb-3 row">
                   <label for="email" class="col-form-label col-sm-4">E-mail:</label>
                   <div class="col-sm-8">
-                    <input type="email" class="form-control" formControlName="email" placeholder="E-mail">
-                  </div>
+                    <input type="email" class="form-control" formControlName="email" placeholder="E-mail"  [ngClass]="{'is-valid': submitted &&
+                    !companyForm.get('email')?.errors,'is-invalid': submitted && companyForm.get('email')?.errors}" >
+                    </div>
                 </div>
+                    <div class="invalid-feedback d-block" *ngIf=" submitted && companyForm.get('email')?.hasError('required')">
+                      Email is required
+                    </div>
+            
                 <div class="mb-3 row">
                   <label for="password" class="col-form-label col-sm-4">Password:</label>
                   <div class="col-sm-8">
-                    <input type="password" class="form-control" formControlName="password" placeholder="password">
-                  </div>
+                    <input type="password" class="form-control" formControlName="password" placeholder="password"  [ngClass]="{'is-valid': submitted &&
+                    !companyForm.get('password')?.errors,'is-invalid': submitted && companyForm.get('password')?.errors}" >
+                    </div>
                 </div>
+                    <div class="invalid-feedback d-block" *ngIf=" submitted && companyForm.get('password')?.hasError('required')">
+                        Password is required
+                    </div>
+                
                 <div class="mb-3 row">
                   <label for="role" class="col-form-label col-sm-4">Role:</label>
                   <div class="col-sm-8">
@@ -92,10 +112,18 @@
                   <label for="photo" class="col-form-label col-sm-4">Photo:</label>
                   <div class="col-sm-8">
                     <input type="file" class="form-control" (change)="selectImage($event)" placeholder="Photo"
-                      accept="image/*">
+                      accept="image/*"  [ngClass]="{'is-valid': submitted &&
+                      !companyForm.get('photo')?.errors,'is-invalid': submitted && companyForm.get('photo')?.errors}" >
+                      </div>
                   </div>
+                      <div class="invalid-feedback d-block" *ngIf=" submitted && companyForm.get('photo')?.hasError('required')">
+                          Time is required
+                      </div>
+                      <div class="event-img">
+                        <img src="companyForm.value.photo" alt="" />
+                    </div>
                   <img *ngIf="companyForm.value.photo" [src]="companyForm.value.photo">
-                </div>
+                
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   <button type="submit" class="btn btn-primary">Save changes</button>

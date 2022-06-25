@@ -32,9 +32,9 @@ export class CompanyComponent implements OnInit {
 
   addCompany() {
     this.submitted = true;
-    // if (this.companyForm?.invalid) {
-    //   return
-    // }
+    if (this.companyForm?.invalid) {
+      return
+    }
     let formData:any=new FormData();
     const companyForm = this.companyForm?.value;
      delete companyForm.photo

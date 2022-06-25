@@ -5,11 +5,13 @@ import { TagComponent } from './tag.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from '@coreui/angular';
 import { ToastrModule } from 'ngx-toastr';
+import { SearchPipe } from './pipes/search.pipe';
 
 
 @NgModule({
   declarations: [
-    TagComponent
+    TagComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,

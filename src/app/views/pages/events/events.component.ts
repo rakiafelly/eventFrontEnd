@@ -39,6 +39,9 @@ export class EventsComponent implements OnInit {
   }
   addEvent() {
     this.submitted = true;
+    if (this.eventForm?.invalid) {
+      return;
+    }
 
     let formData:any=new FormData();
     const eventForm = this.eventForm?.value;
@@ -91,7 +94,6 @@ export class EventsComponent implements OnInit {
     this.eventService.updateEvent(this.eventId,formData).subscribe((response: any) => {
       this.toastr.success('Event is updated successfully','Updated' )
       this.ngOnInit();
-
    }, (error: any) => { console.log(error) }
    )
   }

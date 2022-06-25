@@ -15,7 +15,7 @@ export class TagComponent implements OnInit {
   tags: any
    tagId:any
   submitted=false
-  
+  searchText:any
   constructor(private toastr:ToastrService, private tagService: TagService) { }
 
   ngOnInit(): void {
@@ -27,6 +27,10 @@ this.getAllTags();
   }
 
   addTag() {
+    this.submitted=true;
+    if (this.tagForm?.invalid) {
+      return;
+    }
     this.tagService.createTag(this.tagForm?.value).subscribe((response: any) => {
       this.toastr.success('Tag is created successfully','Success')
       this.ngOnInit();

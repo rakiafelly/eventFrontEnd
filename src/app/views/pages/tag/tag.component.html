@@ -2,6 +2,10 @@
 <div class="card">
   <h4 class="card-header">Tag list</h4>
   <div class="card-body">
+    <div class="row">
+      <div class=" offset-6 col-6 my-5">
+        <input class="form-control" type="search" [(ngModel)]="searchText">
+      </div>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTagModal">
       Add Tag
     </button>
@@ -17,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let tag of tags,let i=index">
+          <tr *ngFor="let tag of tags | search:searchText,let i=index">
             <th>{{i+1}} </th>
             <td>{{tag.title}} </td>
             <td>{{tag.description}} </td>
@@ -44,15 +48,25 @@
               <div class="mb-3 row">
                 <label for="title" class="col-form-label col-sm-2">Title:</label>
                 <div class="col-md-5">
-                  <input type="text" class="form-control" formControlName="title" placeholder="Title">
-                </div>
+                  <input type="text" class="form-control" formControlName="title" placeholder="Title"  [ngClass]="{'is-valid': submitted &&
+                  !tagForm.get('title')?.errors,'is-invalid': submitted && tagForm.get('title')?.errors}" >
+                  </div>
               </div>
+                  <div class="invalid-feedback d-block" *ngIf=" submitted && tagForm.get('title')?.hasError('required')">
+                      Title is required
+                  </div>
+                
               <div class="mb-3 row">
                 <label for="description" class="col-form-label col-sm-2">Description:</label>
                 <div class="col-md-5">
-                  <textarea class="form-control" formControlName="description" placeholder="Description"></textarea>
-                </div>
+                  <textarea class="form-control" formControlName="description" placeholder="Description"  [ngClass]="{'is-valid': submitted &&
+                  !tagForm.get('description')?.errors,'is-invalid': submitted && tagForm.get('description')?.errors}" ></textarea>
+                  </div>
               </div>
+                  <div class="invalid-feedback d-block" *ngIf=" submitted && tagForm.get('description')?.hasError('required')">
+                      Description is required
+                  </div>
+            
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save changes</button>
