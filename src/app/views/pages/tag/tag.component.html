@@ -3,12 +3,15 @@
   <h4 class="card-header">Tag list</h4>
   <div class="card-body">
     <div class="row">
-      <div class=" offset-6 col-6 my-5">
+      <button type="button" class="btn btn-primary  offset-9 col-3 px-5 " data-bs-toggle="modal" data-bs-target="#addCompanyModal">
+        Add Tag
+      </button>
+      
+      <div class="col-3 my-5">
         <input class="form-control" type="search" [(ngModel)]="searchText">
       </div>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTagModal">
-      Add Tag
-    </button>
+    </div>
+  
 
     <div class="row">
       <table class="table table-hover-striped table-responsive">

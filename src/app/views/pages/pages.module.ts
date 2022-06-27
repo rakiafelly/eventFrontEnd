@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistreComponent } from './register/register.component';
 import {RouterModule } from '@angular/router';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ClientComponent } from './client/client.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     RegistreComponent,
     ResetPasswordComponent,
     ForgetPasswordComponent,
+    ClientComponent,
 
   
   ],

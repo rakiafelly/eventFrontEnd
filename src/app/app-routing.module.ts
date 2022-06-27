@@ -8,7 +8,7 @@ import { ResetPasswordComponent} from './views/pages/reset-password/reset-passwo
 
 import { RegistreComponent } from './views/pages/register/register.component';
 import { ForgetPasswordComponent } from './views/pages/forget-password/forget-password.component';
-
+import{AuthGuard}  from './guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +18,7 @@ const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate:[AuthGuard],
     data: {
       title: 'Home'
     },
@@ -109,6 +110,7 @@ const routes: Routes = [
     }
   },
   {path:'reset-password/:token', component:ResetPasswordComponent},
+  { path: 'home-page', loadChildren: () => import('./clientside/clientside.module').then(m => m.ClientsideModule) },
   {path: '**', redirectTo: 'dashboard'},
   ];
 

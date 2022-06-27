@@ -1,24 +1,32 @@
-<!-- Button trigger modal -->
-<div class="card">
+
+  <div class="row">
+
+<div class="card ">
   <h4 class="card-header">Company list</h4>
   <div class="card-body">
     <div class="row">
-      <div class=" offset-6 col-6 my-5">
-        <input class="form-control" type="search" [(ngModel)]="searchText">
+      <div class="col-9 my-5">
+
+        <button type="button" class="btn btn-primary col-5 px-5 " data-bs-toggle="modal" data-bs-target="#addCompanyModal">
+          Add Company
+        </button>
       </div>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCompanyModal">
-        Add Company
-      </button>
+  
+  
+      <div class="col-3 my-5">
+        <input class="search" type="text" [(ngModel)]="searchText" placeholder="search" >
+      </div>
+    </div>
+  </div>
 
       <div class="row">
-        <table class="table table-hover-striped table-responsive">
+        <table class="table">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">email</th>
               <th scope="col">role</th>
-              <th scope="col">avatar</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -29,11 +37,10 @@
               <td>{{company.companyName}} </td>
               <td>{{company.email}} </td>
               <td>{{company.role}} </td>
-              <td>{{company.photo}} </td>
               <td>
-                <button class="btn btn-danger" (click)="delete(company._id)">Delete</button>
+                <button class="btn btn-danger" (click)="delete(company._id)"><i class="fas fa-trash" style="color:white ;" ></i></button>
                 <button class="btn btn-info text-white" (click)="showData(company._id) " data-bs-toggle="modal"
-                  data-bs-target="#updateCompanyModal">update</button>
+                  data-bs-target="#updateCompanyModal"><i class="fas fa-edit"></i></button>
 
               </td>
             </tr>
@@ -199,3 +206,4 @@
       </div>
     </div>
   </div>
+            
