@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-login',
@@ -10,12 +11,12 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
   loginForm?: FormGroup;
   submitted = false;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService,private toastr:ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup(
       {
-        email: new FormControl('', Validators.required),
+        email: new FormControl('',[ Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
         password: new FormControl('', Validators.required),
 
       })
@@ -29,10 +30,13 @@ export class LoginComponent implements OnInit {
     }
     this.authService.login(this.loginForm?.value).subscribe((response: any) => {
       console.log(response);
-      
+      this.toastr.success('login successffly','Success' )
+ 
       
       this.router.navigateByUrl('/dashboard');
       localStorage.setItem('AuthUser',response.token);
-    }, (error: any) => { console.log(error) })
+    }, (error: any) => { console.log(error)
+      this.toastr.success('User is not exist','Failed' )
+    })
   }
 }

@@ -1,1 +1,27 @@
-<p>listevent works!</p>
+<div class="card-content">
+    <div class="card-container">
+      <div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3 mt-3" *ngFor="let event of events">
+          <div class="card h-100" [routerLink]="['detail-event/', event._id]">
+            <img [src]="event.photo" class="card-img-top h-50" alt="">
+            <div class="card-body">
+              <h5 class="card-title">{{event.eventName}}</h5>
+              <p class="card-text">
+                {{event.eventDescription | slice:0:100}}
+                <span *ngIf="event.eventDescription.length > 100">...</span>
+              </p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <p class="badge badge-pill" *ngIf="event.availableTicketNumber!==0" [ngClass]="{'badge-success':event.eventType == 'Free','badge-primary':event.eventType == 'Paid'}">
+                {{event.eventType}}
+              </p>
+              <p class="badge badge-pill" *ngIf="event.availableTicketNumber==0" [ngClass]="{'badge-danger':event.availableTicketNumber == 0}">
+                SOLD
+              </p>
+              <p class="card-text float-right event-date">{{event.startDate | date : 'EEEE, MMMM d, y'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,21 +1,19 @@
-<!-- Button trigger modal -->
-<div class="card">
-  <h4 class="card-header">Event list</h4>
-  <div class="col-9">
-    <input class="form-control" type="text" [(ngModel)]="searchText" >
-</div>
-  <div class="card-body">
-    <div class="row">
-      <button type="button" class="btn btn-primary  offset-9 col-3 px-5 " data-bs-toggle="modal" data-bs-target="#addCompanyModal">
-        Add Event
-      </button>
-    </div>
-    <div class="row">
-      <div class="col-3 my-5">
-        <input class="form-control" type="search" [(ngModel)]="searchText">
+<div class="row">
+  <div class="card ">
+    <h4 class="card-header">Event list</h4>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-9 my-5">
+  
+          <button type="button" class="btn btn-primary col-5 px-5 " data-bs-toggle="modal" data-bs-target="#addEventModal">
+            Add Event
+          </button>
+        </div>
+        <div class="col-3 my-5">
+          <input class="search" type="text" [(ngModel)]="searchText" placeholder="search" >
+        </div>
       </div>
     </div>
-
     <div class="row">
       <table class="table table-hover-striped table-responsive">
         <thead>
@@ -37,20 +35,17 @@
             <td>{{event.price}} </td>
             <td>{{event.availableTicketNumber}} </td>
             <td>{{event.location}} </td>
-            <td>{{event.photo}} </td>
+            <td><img [src]="event.photo" alt="event" width="50px" ></td>
             <td>
 
-              <button class="btn btn-danger" (click)="delete(event._id)">Delete</button>
-              <button class="btn btn-info text-white" (click)="showData(event._id) " data-bs-toggle="modal"
-                data-bs-target="#updateEventModal">update</button>
-
+              <button class="btn btn-info text-white mx-1 " (click)="showData(event._id) " data-bs-toggle="modal"
+              data-bs-target="#updateEventModal"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-danger  " (click)="delete(event._id)"><i class="fas fa-trash" style="color:white ;" ></i></button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-
-
     <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -127,7 +122,6 @@
                   <div class="invalid-feedback d-block" *ngIf=" submitted && eventForm.get('endTime')?.hasError('required')">
                       Time is required
                   </div>
-                
               <div class="mb-3 row">
                 <label for="photo" class="col-form-label col-sm-4">Photo:</label>
                 <div class="col-sm-8">
@@ -277,5 +271,5 @@
         </div>
       </div>
     </div>
-  </div>
+
 </div>

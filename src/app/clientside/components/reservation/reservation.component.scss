@@ -1,0 +1,15 @@
+.reservation {
+    height: 100%;
+    width: 100%;
+    background: url("https://economictimes.indiatimes.com/thumb/msid-55455034,width-1200,height-900,resizemode-4,imgsize-273940/explore-some-of-worlds-best-music-dance-festivals-in-costa-rica-austria.jpg?from=mdr") top center;
+    background-size: cover;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}

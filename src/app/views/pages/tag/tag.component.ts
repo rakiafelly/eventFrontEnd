@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TagService } from './services/tag.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-tag',
@@ -66,6 +65,10 @@ showData(id:number){
   },(error:any)=>{console.log(error)});
 }
   update(){
+    this.submitted=true;
+    if (this.tagForm?.invalid) {
+      return;
+    }
     this.tagService.updateTag(this.tagId,this.tagForm?.value)?.subscribe((response:any)=>{
       this.toastr.success('Tag is updated successfully','Updated' )
       this.ngOnInit();

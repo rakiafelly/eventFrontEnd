@@ -14,14 +14,14 @@ export class CompanyComponent implements OnInit {
   companyId: any;
   selectedFile: any;
   submitted = false;
-  searchText:any;
+  searchText: any;
   constructor(private toastr: ToastrService, private companyService: CompanyService) { }
 
   ngOnInit(): void {
     this.companyForm = new FormGroup({
       companyName: new FormControl('', Validators.required),
       companyDescription: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
+      email: new FormControl('',[ Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
       password: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
       photo: new FormControl(''),
@@ -35,13 +35,12 @@ export class CompanyComponent implements OnInit {
     if (this.companyForm?.invalid) {
       return
     }
-    let formData:any=new FormData();
+    let formData: any = new FormData();
     const companyForm = this.companyForm?.value;
-     delete companyForm.photo
     Object.keys(companyForm).forEach(fieldName => {
       formData.append(fieldName, companyForm[fieldName]);
     });
-    formData.append('photo',this.selectedFile,this.selectedFile.name); 
+    formData.append('photo', this.selectedFile, this.selectedFile.name);
     this.companyService.createCompany(formData).subscribe((response: any) => {
       this.toastr.success('Company is created successfully', 'Success')
       this.ngOnInit();
@@ -51,10 +50,23 @@ export class CompanyComponent implements OnInit {
   }
 
   selectImage(event: any) {
-    const file = event.target.files[0];
-    this.selectedFile = file;
-  }
+    this.selectedFile = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
+    let pattern = /image-*/;
+    if (this.selectedFile) {
+      if (!this.selectedFile.type.match(pattern)) {
+        this.toastr.error('Please select an image file.', 'File not valid!');
+        return;
+      } else {
+        let reader = new FileReader();
+        reader.readAsDataURL(this.selectedFile);
+        reader.onloadend = () => {
+          const base64String = (<string>reader.result).replace("data:", "").replace(/^.+,/, "");
+          this.companyForm?.controls['photo'].setValue("data:image/jpeg;base64," + base64String.toString())
 
+        };
+      }
+    }
+  }
 
 
 
@@ -73,13 +85,16 @@ export class CompanyComponent implements OnInit {
     }, (error: any) => { console.log(error) });
   }
   update() {
-    let formData:any=new FormData();
+    this.submitted = true;
+    if (this.companyForm?.invalid) {
+      return
+    }
+    let formData: any = new FormData();
     const companyForm = this.companyForm?.value;
-     delete companyForm.photo
     Object.keys(companyForm).forEach(fieldName => {
       formData.append(fieldName, companyForm[fieldName]);
     });
-    formData.append('photo',this.selectedFile,this.selectedFile.name); 
+    formData.append('photo', this.selectedFile, this.selectedFile.name);
     this.companyService.updateCompany(this.companyId, formData).subscribe((response: any) => {
       this.toastr.success('Company is updated successfully', 'Updated')
       this.ngOnInit();

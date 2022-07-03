@@ -35,8 +35,9 @@ export class EventsComponent implements OnInit {
 
     })
     this.getAllEvents();
-
   }
+  
+
   addEvent() {
     this.submitted = true;
     if (this.eventForm?.invalid) {
@@ -45,7 +46,6 @@ export class EventsComponent implements OnInit {
 
     let formData:any=new FormData();
     const eventForm = this.eventForm?.value;
-     delete eventForm.photo
     Object.keys(eventForm).forEach(fieldName => {
       formData.append(fieldName, eventForm[fieldName]);
     });
@@ -60,8 +60,23 @@ export class EventsComponent implements OnInit {
   }
 
   selectImage(event: any) {
-    const file = event.target.files[0];
-    this.selectedFile = file;
+    this.selectedFile = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
+    let pattern = /image-*/;
+    if (this.selectedFile) {
+      if (!this.selectedFile.type.match(pattern)) {
+        this.toastr.error('Please select an image file.', 'File not valid!');
+        return;
+      } else {
+        let reader = new FileReader();
+        reader.readAsDataURL(this.selectedFile);
+        reader.onloadend = () => {
+          const base64String = (<string>reader.result).replace("data:", "").replace(/^.+,/, "");
+         this.eventForm?.controls['photo'].setValue("data:image/jpeg;base64," + base64String.toString())
+        
+        };
+      }
+    }
+  
   }
 
 
@@ -84,9 +99,12 @@ export class EventsComponent implements OnInit {
    
 
   update() {
+    this.submitted = true;
+    if (this.eventForm?.invalid) {
+      return;
+    }
     let formData:any=new FormData();
     const eventForm = this.eventForm?.value;
-     delete eventForm.photo
     Object.keys(eventForm).forEach(fieldName => {
       formData.append(fieldName, eventForm[fieldName]);
     });

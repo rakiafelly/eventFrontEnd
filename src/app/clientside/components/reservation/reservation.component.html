@@ -1,1 +1,41 @@
-<p>reservation works!</p>
+<div class="reservation">
+    <div class="card">
+        <h4 class="card-header">Reservation</h4>
+        <div class="card-body">
+            <form *ngIf="reservationForm" [formGroup]="reservationForm" (ngSubmitt)="reservation()">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" formControlName="firstName" class="form-control"
+                        [ngClass]="{'is-valid': submitted &&
+        !reservationForm.get('firstName')?.errors,'is-invalid': submitted && reservationForm.get('firstName')?.errors}">
+                </div>
+                <div class="invalid-feedback d-block"
+                    *ngIf=" submitted && reservationForm.get('firstName')?.hasError('required')">
+                    First Name is required
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" formControlName="lastName" class="form-control" [ngClass]="{'is-valid': submitted &&
+        !reservationForm.get('lastName')?.errors,'is-invalid': submitted && reservationForm.get('lastName')?.errors}">
+                </div>
+                <div class="invalid-feedback d-block"
+                    *ngIf=" submitted && reservationForm.get('lastName')?.hasError('required')">
+                    last Name is required
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="text" formControlName="email" class="form-control" [ngClass]="{'is-valid': submitted &&
+        !reservationForm.get('email')?.errors,'is-invalid': submitted && reservationForm.get('email')?.errors}">
+                </div>
+                <div class="invalid-feedback d-block"
+                    *ngIf=" submitted && reservationForm.get('email')?.hasError('required')">
+                    E-mail is required
+                </div>
+                <div>
+                    <button class="btn btn-success mt-2  " type="submit">Reservation </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

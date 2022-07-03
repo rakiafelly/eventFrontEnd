@@ -9,6 +9,10 @@ import { ResetPasswordComponent} from './views/pages/reset-password/reset-passwo
 import { RegistreComponent } from './views/pages/register/register.component';
 import { ForgetPasswordComponent } from './views/pages/forget-password/forget-password.component';
 import{AuthGuard}  from './guards/auth.guard';
+import { NavbarComponent } from '@coreui/angular';
+import { ListeventComponent } from './clientside/components/listevent/listevent.component';
+import { EventdetailComponent } from './clientside/components/eventdetail/eventdetail.component';
+import { ReservationComponent } from './clientside/components/reservation/reservation.component';
 const routes: Routes = [
   {
     path: '',
@@ -111,7 +115,9 @@ const routes: Routes = [
   },
   {path:'reset-password/:token', component:ResetPasswordComponent},
   { path: 'home-page', loadChildren: () => import('./clientside/clientside.module').then(m => m.ClientsideModule) },
-  {path: '**', redirectTo: 'dashboard'},
+  // {path: '**', redirectTo: 'dashboard'},
+  
+  
   ];
 
 @NgModule({
