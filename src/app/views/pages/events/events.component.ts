@@ -52,7 +52,7 @@ export class EventsComponent implements OnInit {
     formData.append('photo',this.selectedFile,this.selectedFile.name); 
     this.eventService.createEvent(formData).subscribe((response: any) => {
       this.toastr.success('Event is created successfully','Success')
-      this.ngOnInit();
+      location.reload();
     }, (error: any) => {
       console.log(error)
     }
@@ -111,7 +111,7 @@ export class EventsComponent implements OnInit {
     formData.append('photo',this.selectedFile,this.selectedFile.name);
     this.eventService.updateEvent(this.eventId,formData).subscribe((response: any) => {
       this.toastr.success('Event is updated successfully','Updated' )
-      this.ngOnInit();
+      location.reload();
    }, (error: any) => { console.log(error) }
    )
   }

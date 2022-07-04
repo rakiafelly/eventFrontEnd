@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '', component: ClientsideComponent, children: [
       { path: 'list-event', component: ListeventComponent },
       { path: 'list-event/detail-event/:id', component: EventdetailComponent },
-      { path: 'list-event/detail-event/:id/reservation/:id', component: ReservationComponent }]
+      { path: 'list-event/detail-event/:id/reservation', component: ReservationComponent }]
   },
 ];
 

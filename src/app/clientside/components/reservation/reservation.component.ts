@@ -24,15 +24,15 @@ export class ReservationComponent implements OnInit {
       })
   }
   reservation() {
-    // let token = this.route.snapshot.params["token"];
-    // this.reservationForm?.controls['token'].setValue(token);
-    this.reservationService.reservationEvent(this.reservId, this.reservationForm?.value).subscribe((response) => {
+this.submitted=true
+
+    this.reservationService.reservationEvent(this.reservationForm?.value).subscribe((response) => {
       console.log(response);
       
+      this.toastr.success('Your request to reset password was sent to', 'Email sent ');
       
     }, (error) => {
       console.log(error);
-      this.toastr.success('Your request to reset password was sent to', 'Email sent ');
     })
 
   }

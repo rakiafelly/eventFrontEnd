@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ReservationService {
-  baseUrl="http://localhost:3000/api/v1/home-page/list-event/event-detail";
+  baseUrl="http://localhost:3000/api/v1";
 
   constructor(private http:HttpClient) { }
-  reservationEvent(id:any,email:any){
-    return this.http.post(`${this.baseUrl}/${id}/reservation/${id}`,email)
+  reservationEvent(email:any){
+    return this.http.post(`${this.baseUrl}/reservation`,email)
 
 }
 }

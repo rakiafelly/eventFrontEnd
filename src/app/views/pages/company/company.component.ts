@@ -43,7 +43,7 @@ export class CompanyComponent implements OnInit {
     formData.append('photo', this.selectedFile, this.selectedFile.name);
     this.companyService.createCompany(formData).subscribe((response: any) => {
       this.toastr.success('Company is created successfully', 'Success')
-      this.ngOnInit();
+      location.reload();
     }, (error: any) => {
       this.toastr.error('Company already exist', 'Exist');
     })
@@ -97,8 +97,7 @@ export class CompanyComponent implements OnInit {
     formData.append('photo', this.selectedFile, this.selectedFile.name);
     this.companyService.updateCompany(this.companyId, formData).subscribe((response: any) => {
       this.toastr.success('Company is updated successfully', 'Updated')
-      this.ngOnInit();
-
+      location.reload();
     }, (error: any) => { console.log(error) }
     )
   }

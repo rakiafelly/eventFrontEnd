@@ -2,7 +2,7 @@
     <div class="card">
         <h4 class="card-header">Reservation</h4>
         <div class="card-body">
-            <form *ngIf="reservationForm" [formGroup]="reservationForm" (ngSubmitt)="reservation()">
+            <form *ngIf="reservationForm" [formGroup]="reservationForm" (ngSubmit)="reservation()">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
                     <input type="text" formControlName="firstName" class="form-control"

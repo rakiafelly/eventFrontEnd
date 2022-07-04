@@ -32,13 +32,11 @@ this.getAllTags();
     }
     this.tagService.createTag(this.tagForm?.value).subscribe((response: any) => {
       this.toastr.success('Tag is created successfully','Success')
-      this.ngOnInit();
+      location.reload();
     }, (error: any) => {
       this.toastr.error('Tag already exist','Exist');
     }
     )
-    this.hide();
-    
   }
   getAllTags() {
     this.tagService.getTag().subscribe((response: any) => {
@@ -53,11 +51,6 @@ this.getAllTags();
     },(error:any)=>{console.log(error)});
   }
 
-  hide() {
-    this.modal?.hide();
-    // this.tagForm?.reset()
-    this.submitted = false;
-  }
 showData(id:number){
  this.tagId=id;
   this.tagService.getTagById(id).subscribe((response:any)=>{
@@ -71,7 +64,7 @@ showData(id:number){
     }
     this.tagService.updateTag(this.tagId,this.tagForm?.value)?.subscribe((response:any)=>{
       this.toastr.success('Tag is updated successfully','Updated' )
-      this.ngOnInit();
+      location.reload();
     },(error:any)=>{console.log(error)});
     
   }
