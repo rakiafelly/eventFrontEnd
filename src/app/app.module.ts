@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import{HttpClientModule } from '@angular/common/http';
+import{HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import {
   PERFECT_SCROLLBAR_CONFIG,
   PerfectScrollbarConfigInterface,
   PerfectScrollbarModule,
 } from 'ngx-perfect-scrollbar';
+import { TokenInterceptorService } from './providers/token-interceptor.service';
 
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -42,6 +43,7 @@ import {
   SidebarModule,
   TabsModule,
   UtilitiesModule,
+  
 
 
 } from '@coreui/angular';
@@ -93,7 +95,8 @@ const APP_CONTAINERS = [
     CardModule,
     FormModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    CommonModule
   ],
   providers: [
     {
@@ -103,6 +106,11 @@ const APP_CONTAINERS = [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi   : true,
     },
     IconSetService,
     Title

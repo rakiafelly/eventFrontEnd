@@ -21,6 +21,7 @@ export class AuthGuard implements CanActivate {
       else {
       const expire=this.isExpiredToken(AuthUser);
       if(expire){
+        localStorage.removeItem('AuthUser')
         this.router.navigateByUrl('/login');
         return false;
       } else{
@@ -31,10 +32,6 @@ export class AuthGuard implements CanActivate {
 
  isExpiredToken(AuthUser: string):boolean {
   let decoded:any= jwt_decode(AuthUser);
-  const expireDate=new Date();
-  expireDate.setUTCDate(decoded.exp);
-  const currentDate=new Date();
-  return (expireDate.valueOf() > currentDate.valueOf())
-
+  return Math.floor(new Date().getTime()/1000)>=decoded.exp
 }
 }

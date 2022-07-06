@@ -18,7 +18,8 @@ import { SearchPipe } from './pipes/search.pipe';
     EventsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FormModule
+    FormModule,
+    CommonModule
   ]
 })
 export class EventsModule {

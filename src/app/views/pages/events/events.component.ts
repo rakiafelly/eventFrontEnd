@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {  ToastrService } from 'ngx-toastr';
 import { EventService } from './services/event.service';
 
+
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
@@ -16,6 +17,8 @@ export class EventsComponent implements OnInit {
   eventId: any;
   selectedFile:any;
   searchText:any
+  public tags = [];
+
   constructor(private toastr:ToastrService,  private eventService: EventService) { }
 
   ngOnInit(): void {
