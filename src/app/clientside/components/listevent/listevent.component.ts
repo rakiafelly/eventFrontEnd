@@ -10,6 +10,7 @@ import{DetailService} from './services/detail.service'
 export class ListeventComponent implements OnInit {
 events:any
 currentDate=new Date();
+
   constructor(private route:Router,private toaster:ToastrModule,private detailService:DetailService) { }
 
   ngOnInit(): void {

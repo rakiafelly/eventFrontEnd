@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { IOption } from 'ng-select';
 import {  ToastrService } from 'ngx-toastr';
 import { EventService } from './services/event.service';
 
@@ -17,9 +18,9 @@ export class EventsComponent implements OnInit {
   eventId: any;
   selectedFile:any;
   searchText:any
-  public tags = [];
+  tags:Array<IOption> =[]
 
-  constructor(private toastr:ToastrService,  private eventService: EventService) { }
+  constructor(private toastr:ToastrService, private eventService: EventService) { }
 
   ngOnInit(): void {
     this.eventForm = new FormGroup({
@@ -34,9 +35,9 @@ export class EventsComponent implements OnInit {
       availableTicketNumber: new FormControl('', [Validators.required]),
       eventType: new FormControl('', [Validators.required]),
       location: new FormControl('', [Validators.required]),
-
-
+      tags: new FormControl('')
     })
+this.getAllTags();
     this.getAllEvents();
   }
   
@@ -111,7 +112,8 @@ export class EventsComponent implements OnInit {
     Object.keys(eventForm).forEach(fieldName => {
       formData.append(fieldName, eventForm[fieldName]);
     });
-    formData.append('photo',this.selectedFile,this.selectedFile.name);
+    if(this.selectedFile){
+    formData.append('photo',this.selectedFile,this.selectedFile.name);}
     this.eventService.updateEvent(this.eventId,formData).subscribe((response: any) => {
       this.toastr.success('Event is updated successfully','Updated' )
       location.reload();
@@ -128,6 +130,17 @@ export class EventsComponent implements OnInit {
       console.log(error)
     }
     )
+   }
+
+   getAllTags(){
+    this.eventService.getTags().subscribe((response:any)=>{
+      this.tags=response;
+    
+      
+    },(err)=>{
+      console.log(err);
+      
+    })
    }
 
   }

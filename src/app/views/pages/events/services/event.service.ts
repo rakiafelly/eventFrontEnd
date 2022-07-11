@@ -26,6 +26,9 @@ export class EventService {
   updateEvent(id:any,data:any){
     return this.http.put(`${this.baseUrl}event/`+id,data)
   }
+  getTags(){
+    return this.http.get(`${this.baseUrl}alltags`);
+  }
 }
 
 

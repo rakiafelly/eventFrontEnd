@@ -12,4 +12,12 @@ export class ReservationService {
     return this.http.post(`${this.baseUrl}/reservation`,email)
 
 }
+
+getEventById(id:number){
+  return this.http.get(`${this.baseUrl}/event/${id}`)
+}
+
+// getEventByTd(id:any){
+//   return this.http.get(`${this.baseUrl}event/`+id)
+// }
 }

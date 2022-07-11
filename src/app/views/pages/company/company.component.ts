@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { IOption } from 'ng-select';
 import { CompanyService } from './services/company.service';
+import jwt_decode from "jwt-decode";
+
 
 @Component({
   selector: 'app-company',
@@ -15,6 +18,10 @@ export class CompanyComponent implements OnInit {
   selectedFile: any;
   submitted = false;
   searchText: any;
+  connectedCompanyId:any;
+  company:any
+  connectedCompanyRole:any;
+
   constructor(private toastr: ToastrService, private companyService: CompanyService) { }
 
   ngOnInit(): void {
@@ -25,8 +32,15 @@ export class CompanyComponent implements OnInit {
       password: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
       photo: new FormControl(''),
+    
     })
+
     this.getAllCompanies();
+    // const token:any = localStorage.getItem('AuthUser');
+    // let decoded: any = jwt_decode(token);
+    // this.connectedCompanyId = decoded.userId;
+    // this.connectedCompanyRole=decoded.companyRole;
+    
 
   }
 
@@ -40,7 +54,8 @@ export class CompanyComponent implements OnInit {
     Object.keys(companyForm).forEach(fieldName => {
       formData.append(fieldName, companyForm[fieldName]);
     });
-    formData.append('photo', this.selectedFile, this.selectedFile.name);
+    if(this.selectedFile){
+    formData.append('photo', this.selectedFile, this.selectedFile.name);}
     this.companyService.createCompany(formData).subscribe((response: any) => {
       this.toastr.success('Company is created successfully', 'Success')
       location.reload();
@@ -94,7 +109,8 @@ export class CompanyComponent implements OnInit {
     Object.keys(companyForm).forEach(fieldName => {
       formData.append(fieldName, companyForm[fieldName]);
     });
-    formData.append('photo', this.selectedFile, this.selectedFile.name);
+    if(this.selectedFile){
+    formData.append('photo', this.selectedFile, this.selectedFile.name);}
     this.companyService.updateCompany(this.companyId, formData).subscribe((response: any) => {
       this.toastr.success('Company is updated successfully', 'Updated')
       location.reload();
@@ -109,4 +125,6 @@ export class CompanyComponent implements OnInit {
       console.log(error)
     })
   }
+
+ 
 }

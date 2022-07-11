@@ -31,10 +31,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm?.value).subscribe((response: any) => {
       console.log(response);
       this.toastr.success('login successffly','Success' )
- 
-      
       this.router.navigateByUrl('/dashboard');
-      localStorage.setItem('AuthUser',response.token);
+       localStorage.setItem('AuthUser',response.token);
     }, (error: any) => { console.log(error)
       this.toastr.success('User is not exist','Failed' )
     })

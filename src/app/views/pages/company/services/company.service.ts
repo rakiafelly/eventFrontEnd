@@ -26,4 +26,7 @@ export class CompanyService {
   deleteCompany(id:any){
     return this.http.delete(`${this.baseUrl}company/`+id)
   }
+  getEvents(){
+    return this.http.get(`${this.baseUrl}allEvents`)
+  }
 }

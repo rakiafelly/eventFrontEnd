@@ -24,6 +24,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.authService.logOut().subscribe((response)=>{
       this.toastr.success('logged out of your account successfully','Logged out')
       localStorage.removeItem('AuthUser');
+      location.reload();
     })
   }
 }

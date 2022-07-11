@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormModule } from '@coreui/angular';
 import { EventsComponent } from './events.component';
 import { SearchPipe } from './pipes/search.pipe';
+import { SelectModule } from 'ng-select';
 
 
 
@@ -19,7 +20,8 @@ import { SearchPipe } from './pipes/search.pipe';
     FormsModule,
     ReactiveFormsModule,
     FormModule,
-    CommonModule
+    CommonModule,
+    SelectModule
   ]
 })
 export class EventsModule {
